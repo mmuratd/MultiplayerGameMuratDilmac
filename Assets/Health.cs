@@ -15,13 +15,14 @@ public class Health : NetworkBehaviour,IDamageable
 
     public void Damage(int damageAmount)
     {
+        Debug.Log("healtte damage içi healt: " + playerHealth);
         DamageServerRpc(damageAmount); 
     }
     [ServerRpc]
     private void DamageServerRpc(int damageAmount)
     {
         playerHealth = playerHealth - damageAmount;
-        Debug.Log("healtte damage içi healt: " + playerHealth);
+        Debug.Log("healtte damage server rpc içi healt: " + playerHealth);
         animator.SetTrigger("Hurt");
         if (playerHealth < 1)
         {

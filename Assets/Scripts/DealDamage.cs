@@ -11,12 +11,12 @@ public class DealDamage : NetworkBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("ontriggera girdi.");
+        
         var hit = other.GetComponent<IDamageable>();
 
         if (hit != null)
         {
-            Debug.Log("ontriggera girdi. ve hit null deðil");
+            Debug.Log("ontriggera girdi. ve hit null deðil" + attackPower);
             hit.Damage(attackPower);
         }
     }

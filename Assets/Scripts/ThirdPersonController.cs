@@ -169,14 +169,15 @@ namespace StarterAssets
 
         private void Update()
         {
-            _hasAnimator = TryGetComponent(out _animator);
-
-            JumpAndGravity();
             GroundedCheck();
+            if (!IsOwner) return;
+            _hasAnimator = TryGetComponent(out _animator);
+           
 
             if (IsServer && IsLocalPlayer)
             {
                 Move(_input.move);
+                JumpAndGravity(_input.jump);
 
             }
             else if (IsClient && IsLocalPlayer)
@@ -184,9 +185,16 @@ namespace StarterAssets
 
                 MoveServerRpc(_input.move);
                 InputCheck();
+                JumpServerRpc(_input.jump);
 
             }
 
+        }
+
+        [ServerRpc]
+        private void JumpServerRpc(bool jump)
+        {
+            JumpAndGravity(jump);
         }
 
         private void InputCheck()
@@ -235,6 +243,7 @@ namespace StarterAssets
 
 
         }
+        
 
 
 
@@ -408,7 +417,7 @@ namespace StarterAssets
             }
         }
 
-        private void JumpAndGravity()
+        private void JumpAndGravity(bool jump)
         {
             if (Grounded)
             {
@@ -429,7 +438,7 @@ namespace StarterAssets
                 }
 
                 // Jump
-                if (_input.jump && _jumpTimeoutDelta <= 0.0f)
+                if (jump && _jumpTimeoutDelta <= 0.0f)
                 {
                     // the square root of H * -2 * G = how much velocity needed to reach desired height
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
@@ -468,6 +477,7 @@ namespace StarterAssets
 
                 // if we are not grounded, do not jump
                 _input.jump = false;
+                JumpClientRpc();
             }
 
             // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
@@ -475,6 +485,12 @@ namespace StarterAssets
             {
                 _verticalVelocity += Gravity * Time.deltaTime;
             }
+        }
+
+        [ClientRpc]
+        private void JumpClientRpc()
+        {
+            _input.jump = false;
         }
 
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
