@@ -1,33 +1,42 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UiCreateObject : MonoBehaviour
+public class UiCreateObject : NetworkBehaviour
 {
-    public GameObject canAzaltanPrefab;
-    public Transform spawnPoint;
+ 
+    [SerializeField] private Transform spawnedObjectPrefab;
+    public TMP_InputField inputField;
 
-    public InputField inputField;
+    private Transform spawnedObjectTransform;
 
-    // Start is called before the first frame update
-    void Start()
+
+    [ServerRpc(RequireOwnership = false)]
+    public void CreateObjectServerRpc(int canSayisi)
     {
-        
+        for (int i = 0; i < canSayisi; i++)
+        {
+            Debug.Log("CreateObjectServerRpc called with canCount: ");
+            spawnedObjectTransform = Instantiate(spawnedObjectPrefab);
+            spawnedObjectTransform.GetComponent<NetworkObject>().Spawn(true);
+        }
+      
+       
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void OnClickCreateObject()
     {
         int canSayisi = int.Parse(inputField.text);
-        for (int i = 0; i < canSayisi; i++)
-        {
-            Instantiate(canAzaltanPrefab, spawnPoint.position, Quaternion.identity);
-        }
+        Debug.Log("onclick button kýsmý" + canSayisi);
+
+        CreateObjectServerRpc(canSayisi);
+        
+        
+        
     }
 }

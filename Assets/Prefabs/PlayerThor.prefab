@@ -19,6 +19,8 @@ GameObject:
   - component: {fileID: 5571055976908687318}
   - component: {fileID: 6623121036270318225}
   - component: {fileID: 1206942580310770967}
+  - component: {fileID: 8876312915989326647}
+  - component: {fileID: 2063971375506850870}
   m_Layer: 8
   m_Name: PlayerThor
   m_TagString: Player
@@ -345,6 +347,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerCameraRoot: {fileID: 1283399585225452812}
+--- !u!114 &8876312915989326647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128680540743318518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9156a17b7fd6584e8dfb9d9c3d21989, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: 100
+  maxHealth: 100
+  deadHealth: 0
+--- !u!136 &2063971375506850870
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128680540743318518}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.33
+  m_Height: 1.62
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!1 &5326336695809777088
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,28 +7,17 @@ using UnityEngine;
 public class DealDamage : NetworkBehaviour
 {
 
-    [SerializeField] private int attackPower = 1;
+    [SerializeField] private int attackPower = 10;
 
-    private bool canAttack;
-
-    public void OnHit()
+    private void OnTriggerEnter(Collider other)
     {
-
-    }
-    private void OnEnable()
-    {
-        canAttack = true;
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
+        Debug.Log("ontriggera girdi.");
         var hit = other.GetComponent<IDamageable>();
 
         if (hit != null)
         {
-
+            Debug.Log("ontriggera girdi. ve hit null deðil");
             hit.Damage(attackPower);
-
         }
     }
 
