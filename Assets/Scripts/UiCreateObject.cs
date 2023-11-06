@@ -35,8 +35,11 @@ public class UiCreateObject : NetworkBehaviour
         Debug.Log("onclick button kýsmý" + canSayisi);
 
         CreateObjectServerRpc(canSayisi);
-        
-        
-        
+ 
+    }
+
+    public void SpawnObjectWithCommand(int count)
+    {
+        CreateObjectServerRpc(count);
     }
 }
