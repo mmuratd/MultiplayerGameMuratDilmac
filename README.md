@@ -1,4 +1,5 @@
 # Unity Multiplayer Game Project
+![image](https://github.com/mmuratd/MultiplayerGameBootcampMuratDilmac/assets/76118329/f2bab002-48fc-40e7-926b-1de3948ec79c)
 
 This Unity project is a multiplayer game that utilizes Netcode for synchronization. It features a variety of gameplay enhancements to create an engaging multiplayer experience.
 
